@@ -9,23 +9,8 @@ from sentence_transformers import SentenceTransformer, util
 
 model = SentenceTransformer('sentence-transformers/paraphrase-distilroberta-base-v1')
 
-frydf = pd.read_csv('frydf.csv').copy()
-heatdf = pd.read_csv('heatdf.csv').copy()
-bakedf = pd.read_csv('bakedf.csv').copy()
-stirfrydf = pd.read_csv('stirfrydf.csv').copy()
-boildowndf = pd.read_csv('boildowndf.csv').copy()
-griddledf = pd.read_csv('griddledf.csv').copy()
-steamdf = pd.read_csv('steamdf.csv').copy()
-seasondf = pd.read_csv('seasondf.csv').copy()
-pickledf = pd.read_csv('pickledf.csv').copy()
-rubdf = pd.read_csv('rubdf.csv').copy()
-blanchdf = pd.read_csv('blanchdf.csv').copy()
-boildf = pd.read_csv('boildf.csv').copy()
-rawdf = pd.read_csv('rawdf.csv').copy()
-otherdf = pd.read_csv('otherdf.csv').copy()
-vietdf = pd.read_csv('vietdf.csv').copy()
 
-recipe_list = [frydf,heatdf,bakedf,stirfrydf,boildowndf,griddledf,steamdf,seasondf,pickledf,rubdf,blanchdf,boildf,rawdf,otherdf,vietdf]
+# viet_li
 
 
 app = Flask(__name__)
@@ -96,6 +81,24 @@ def category1():
     # if auth.current_user is None:
     #     return {'message': 'No users signed in'}, 400
 
+    frydf = pd.read_csv('frydf.csv').copy()
+    heatdf = pd.read_csv('heatdf.csv').copy()
+    bakedf = pd.read_csv('bakedf.csv').copy()
+    stirfrydf = pd.read_csv('stirfrydf.csv').copy()
+    boildowndf = pd.read_csv('boildowndf.csv').copy()
+    griddledf = pd.read_csv('griddledf.csv').copy()
+    steamdf = pd.read_csv('steamdf.csv').copy()
+    seasondf = pd.read_csv('seasondf.csv').copy()
+    pickledf = pd.read_csv('pickledf.csv').copy()
+    rubdf = pd.read_csv('rubdf.csv').copy()
+    blanchdf = pd.read_csv('blanchdf.csv').copy()
+    boildf = pd.read_csv('boildf.csv').copy()
+    rawdf = pd.read_csv('rawdf.csv').copy()
+    otherdf = pd.read_csv('otherdf.csv').copy()
+    vietdf = pd.read_csv('vietdf.csv').copy()
+
+    recipe_list = [frydf,heatdf,bakedf,stirfrydf,boildowndf,griddledf,steamdf,seasondf,pickledf,rubdf,blanchdf,boildf,rawdf,otherdf,vietdf]
+
     favDish= request.json.get('favDish')
     dislikeIngredient = request.json.get('dislikeIngredient')
     
@@ -139,7 +142,7 @@ def category1():
     # similar_dishes_list = list(chain.from_iterable(tmp_dishes_list))
     # list(set(similar_dishes_list))
     
-    return {"similar_dishes": f"{tmp_dishes_list}"}, 200  
+    return jsonify({"dishes": tmp_dishes_list}), 200  
     # return {"similar_dishes": "sth"}, 200  
 
 
@@ -148,6 +151,10 @@ def category2():
     # if auth.current_user is None:
     #     return {'message': 'No users signed in'}, 400
 
+    vietdf = pd.read_csv('vietdf.csv').copy()
+
+    famCountry = request.json.get('famCountry')
+    curCountry = request.json.get('curCountry')
     favDish= request.json.get('favDish')
     dislikeIngredient = request.json.get('dislikeIngredient')
     
@@ -190,7 +197,7 @@ def category2():
     # similar_dishes_list = list(chain.from_iterable(tmp_dishes_list))
     # list(set(similar_dishes_list))
     
-    return {"similar_dishes": f"{tmp_dishes_list}"}, 200  
+    return jsonify({"dishes": tmp_dishes_list}), 200  
     # return {"similar_dishes": "sth"}, 200  
 
 
@@ -198,6 +205,23 @@ def category2():
 def category3():
     # if auth.current_user is None:
     #     return {'message': 'No users signed in'}, 400
+    frydf = pd.read_csv('frydf.csv').copy()
+    heatdf = pd.read_csv('heatdf.csv').copy()
+    bakedf = pd.read_csv('bakedf.csv').copy()
+    stirfrydf = pd.read_csv('stirfrydf.csv').copy()
+    boildowndf = pd.read_csv('boildowndf.csv').copy()
+    griddledf = pd.read_csv('griddledf.csv').copy()
+    steamdf = pd.read_csv('steamdf.csv').copy()
+    seasondf = pd.read_csv('seasondf.csv').copy()
+    pickledf = pd.read_csv('pickledf.csv').copy()
+    rubdf = pd.read_csv('rubdf.csv').copy()
+    blanchdf = pd.read_csv('blanchdf.csv').copy()
+    boildf = pd.read_csv('boildf.csv').copy()
+    rawdf = pd.read_csv('rawdf.csv').copy()
+    otherdf = pd.read_csv('otherdf.csv').copy()
+    vietdf = pd.read_csv('vietdf.csv').copy()
+
+    recipe_list = [frydf,heatdf,bakedf,stirfrydf,boildowndf,griddledf,steamdf,seasondf,pickledf,rubdf,blanchdf,boildf,rawdf,otherdf,vietdf]
 
     favDish= request.json.get('favDish')
     dislikeIngredient = request.json.get('dislikeIngredient')
@@ -246,7 +270,7 @@ def category3():
     # similar_dishes_list = list(chain.from_iterable(tmp_dishes_list))
     # list(set(similar_dishes_list))
     
-    return {"similar_dishes": f"{tmp_dishes_list}"}, 200  
+    return jsonify({"dishes": tmp_dishes_list}), 200  
     # return {"similar_dishes": "sth"}, 200  
 
 
@@ -254,6 +278,23 @@ def category3():
 def category4():
     # if auth.current_user is None:
     #     return {'message': 'No users signed in'}, 400
+    frydf = pd.read_csv('frydf.csv').copy()
+    heatdf = pd.read_csv('heatdf.csv').copy()
+    bakedf = pd.read_csv('bakedf.csv').copy()
+    stirfrydf = pd.read_csv('stirfrydf.csv').copy()
+    boildowndf = pd.read_csv('boildowndf.csv').copy()
+    griddledf = pd.read_csv('griddledf.csv').copy()
+    steamdf = pd.read_csv('steamdf.csv').copy()
+    seasondf = pd.read_csv('seasondf.csv').copy()
+    pickledf = pd.read_csv('pickledf.csv').copy()
+    rubdf = pd.read_csv('rubdf.csv').copy()
+    blanchdf = pd.read_csv('blanchdf.csv').copy()
+    boildf = pd.read_csv('boildf.csv').copy()
+    rawdf = pd.read_csv('rawdf.csv').copy()
+    otherdf = pd.read_csv('otherdf.csv').copy()
+    vietdf = pd.read_csv('vietdf.csv').copy()
+
+    recipe_list = [frydf,heatdf,bakedf,stirfrydf,boildowndf,griddledf,steamdf,seasondf,pickledf,rubdf,blanchdf,boildf,rawdf,otherdf,vietdf]
 
     favDish= request.json.get('favDish')
     dislikeIngredient = request.json.get('dislikeIngredient')
@@ -300,8 +341,8 @@ def category4():
     # similar_dishes_list = list(chain.from_iterable(tmp_dishes_list))
     # list(set(similar_dishes_list))
     
-    return {"similar_dishes": f"{tmp_dishes_list}"}, 200  
+    return jsonify({"dishes": tmp_dishes_list}), 200  
     # return {"similar_dishes": "sth"}, 200  
 
 if __name__ == '__main__':
-    app.run(host = '0.0.0.0', port = 5000)
+    app.run(host = 'localhost', port = 5000)
