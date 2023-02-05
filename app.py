@@ -29,7 +29,7 @@ config = {
 
 
 # firebase = pyrebase.initialize_app(config)
-auth = firebase.auth()
+# auth = firebase.auth()
 
 app.secret_key='secret'
 
