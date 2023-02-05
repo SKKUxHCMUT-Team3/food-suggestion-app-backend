@@ -356,26 +356,26 @@ import numpy as np
 from itertools import chain
 from sentence_transformers import SentenceTransformer, util
 
-path = os.getcwd()
-path += '/backend/'
+path = ""
+path += 'https://raw.githubusercontent.com/SKKUxHCMUT-Team3/food-suggestion-app-backend/main/'
 
 model = SentenceTransformer('sentence-transformers/paraphrase-distilroberta-base-v1')
 
-frydf = pd.read_csv(path + 'frydf.csv').copy()
-heatdf = pd.read_csv(path + 'heatdf.csv').copy()
-bakedf = pd.read_csv(path + 'bakedf.csv').copy()
-stirfrydf = pd.read_csv(path + 'stirfrydf.csv').copy()
-boildowndf = pd.read_csv(path + 'boildowndf.csv').copy()
-griddledf = pd.read_csv(path + 'griddledf.csv').copy()
-steamdf = pd.read_csv(path + 'steamdf.csv').copy()
-seasondf = pd.read_csv(path + 'seasondf.csv').copy()
-pickledf = pd.read_csv(path + 'pickledf.csv').copy()
-rubdf = pd.read_csv(path + 'rubdf.csv').copy()
-blanchdf = pd.read_csv(path + 'blanchdf.csv').copy()
-boildf = pd.read_csv(path + 'boildf.csv').copy()
-rawdf = pd.read_csv(path + 'rawdf.csv').copy()
-otherdf = pd.read_csv(path + 'otherdf.csv').copy()
-vietdf = pd.read_csv(path + 'vietdf.csv').copy()
+frydf = pd.read_csv(path + 'frydf.csv',sep=',')
+heatdf = pd.read_csv(path + 'heatdf.csv',sep=',')
+bakedf = pd.read_csv(path + 'bakedf.csv',sep=',')
+stirfrydf = pd.read_csv(path + 'stirfrydf.csv',sep=',')
+boildowndf = pd.read_csv(path + 'boildowndf.csv',sep=',')
+griddledf = pd.read_csv(path + 'griddledf.csv',sep=',')
+steamdf = pd.read_csv(path + 'steamdf.csv',sep=',')
+seasondf = pd.read_csv(path + 'seasondf.csv',sep=',')
+pickledf = pd.read_csv(path + 'pickledf.csv',sep=',')
+rubdf = pd.read_csv(path + 'rubdf.csv',sep=',')
+blanchdf = pd.read_csv(path + 'blanchdf.csv',sep=',')
+boildf = pd.read_csv(path + 'boildf.csv',sep=',')
+rawdf = pd.read_csv(path + 'rawdf.csv',sep=',')
+otherdf = pd.read_csv(path + 'otherdf.csv',sep=',')
+vietdf = pd.read_csv(path + 'vietdf.csv',sep=',')
 
 recipe_list = [frydf,heatdf,bakedf,stirfrydf,boildowndf,griddledf,steamdf,seasondf,pickledf,rubdf,blanchdf,boildf,rawdf,otherdf,vietdf]
 
