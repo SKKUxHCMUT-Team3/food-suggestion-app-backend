@@ -1,4 +1,4 @@
-import pyrebase
+# import pyrebase
 from flask import Flask, request, jsonify, session, Response
 
 import pandas as pd
@@ -28,7 +28,7 @@ config = {
 }
 
 
-firebase = pyrebase.initialize_app(config)
+# firebase = pyrebase.initialize_app(config)
 auth = firebase.auth()
 
 app.secret_key='secret'
@@ -51,47 +51,47 @@ def find_simi_place(df, sorted_ind, place_name, top_n=10):
 
 
 
-@app.route('/login', methods = ['POST'])
-def signin():
-    email = request.json.get('email')
-    password = request.json.get('password')
-    if email is None or password is None:
-        return {"message": "Missing email or password"}, 400
+# @app.route('/login', methods = ['POST'])
+# def signin():
+#     email = request.json.get('email')
+#     password = request.json.get('password')
+#     if email is None or password is None:
+#         return {"message": "Missing email or password"}, 400
     
-    try: 
-        user = auth.sign_in_with_email_and_password(email=email, password=password)
-        print (email)
-        user_id = auth.get_account_info(user['idToken'])
-        session['user'] = user_id
-        return {"message": f"User name: {user_id}"}, 200
-    except Exception as e:
-        return f"An Error Occurred: {e}"
+#     try: 
+#         user = auth.sign_in_with_email_and_password(email=email, password=password)
+#         print (email)
+#         user_id = auth.get_account_info(user['idToken'])
+#         session['user'] = user_id
+#         return {"message": f"User name: {user_id}"}, 200
+#     except Exception as e:
+#         return f"An Error Occurred: {e}"
 
 
-@app.route('/logout', methods = ['GET'])
-def logout():
-    # print (auth.current_user)
-    current_user = auth.current_user
-    if current_user is None:
-        return {"message":"No users signed in"}, 400
+# @app.route('/logout', methods = ['GET'])
+# def logout():
+#     # print (auth.current_user)
+#     current_user = auth.current_user
+#     if current_user is None:
+#         return {"message":"No users signed in"}, 400
 
-    auth.current_user = None
-    return {"message": f"{current_user['email']} signed out"}, 200
+#     auth.current_user = None
+#     return {"message": f"{current_user['email']} signed out"}, 200
 
 
-@app.route('/register', methods = ['GET','POST'])
-def register():
-    if request.method == 'POST':
-        email = request.json.get('email')
-        password = request.json.get('password')
-        if email is None or password is None:
-            return {"message": "Missing email or password"}, 400
+# @app.route('/register', methods = ['GET','POST'])
+# def register():
+#     if request.method == 'POST':
+#         email = request.json.get('email')
+#         password = request.json.get('password')
+#         if email is None or password is None:
+#             return {"message": "Missing email or password"}, 400
 
-        try: 
-            auth.create_user_with_email_and_password(email=email, password=password)
-            return {"message": "Successfully registered"}, 200  
-        except Exception as e:
-            return f"An Error Occurred: {e}"
+#         try: 
+#             auth.create_user_with_email_and_password(email=email, password=password)
+#             return {"message": "Successfully registered"}, 200  
+#         except Exception as e:
+#             return f"An Error Occurred: {e}"
 
 
 @app.route('/category1', methods = ['POST']) #ko -> ko
