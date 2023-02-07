@@ -1,11 +1,10 @@
-# import pyrebase
 from flask import Flask, request, jsonify, session, Response
 
 import pandas as pd
 import numpy as np
 from itertools import chain
-# from sentence_transformers import SentenceTransformer, util
-from sklearn.feature_extraction.text import CountVectorizer  # 피체 벡터화
+from sklearn.feature_extraction.text import TfidfVectorizer
+# from sklearn.feature_extraction.text import CountVectorizer  # 피체 벡터화
 from sklearn.metrics.pairwise import cosine_similarity  # 코사인 유사도
 
 path = ""
@@ -15,23 +14,6 @@ vidata = pd.read_csv(path + 'vidata.csv',sep=',')
 kodata = pd.read_csv(path + 'kodata.csv',sep=',')
 
 app = Flask(__name__)
-
-config = {
-  "apiKey": "AIzaSyAG6QwyEiDmFV4pWQHQn-1q5J4Y6mlJcEI",
-  "authDomain": "lav1ne-sample.firebaseapp.com",
-  "projectId": "lav1ne-sample",
-  "storageBucket": "lav1ne-sample.appspot.com",
-  "messagingSenderId": "374481316324",
-  "appId": "1:374481316324:web:169065ccd71cc6db733ff1",
-  "measurementId": "G-3DE8YQ5DBG",
-  "databaseURL": ""
-}
-
-
-# firebase = pyrebase.initialize_app(config)
-# auth = firebase.auth()
-
-app.secret_key='secret'
 
 def find_simi_place(df, sorted_ind, place_name, top_n=10):
     
@@ -47,52 +29,6 @@ def find_simi_place(df, sorted_ind, place_name, top_n=10):
         List[i] = List[i][0]
 
     return List
-
-
-
-
-# @app.route('/login', methods = ['POST'])
-# def signin():
-#     email = request.json.get('email')
-#     password = request.json.get('password')
-#     if email is None or password is None:
-#         return {"message": "Missing email or password"}, 400
-    
-#     try: 
-#         user = auth.sign_in_with_email_and_password(email=email, password=password)
-#         print (email)
-#         user_id = auth.get_account_info(user['idToken'])
-#         session['user'] = user_id
-#         return {"message": f"User name: {user_id}"}, 200
-#     except Exception as e:
-#         return f"An Error Occurred: {e}"
-
-
-# @app.route('/logout', methods = ['GET'])
-# def logout():
-#     # print (auth.current_user)
-#     current_user = auth.current_user
-#     if current_user is None:
-#         return {"message":"No users signed in"}, 400
-
-#     auth.current_user = None
-#     return {"message": f"{current_user['email']} signed out"}, 200
-
-
-# @app.route('/register', methods = ['GET','POST'])
-# def register():
-#     if request.method == 'POST':
-#         email = request.json.get('email')
-#         password = request.json.get('password')
-#         if email is None or password is None:
-#             return {"message": "Missing email or password"}, 400
-
-#         try: 
-#             auth.create_user_with_email_and_password(email=email, password=password)
-#             return {"message": "Successfully registered"}, 200  
-#         except Exception as e:
-#             return f"An Error Occurred: {e}"
-
 
 @app.route('/category1', methods = ['POST']) #ko -> ko
 def category1():
@@ -124,7 +60,7 @@ def category1():
     doc = pd.concat([food_indf, cdata])
     doc.reset_index(drop=True, inplace=True)
 
-    count_vect_category = CountVectorizer(min_df=0, ngram_range=(1,2))
+    count_vect_category = TfidfVectorizer(min_df=0, ngram_range=(1,2))
     place_category = count_vect_category.fit_transform(doc['ingredient']) 
     place_simi_cate = cosine_similarity(place_category, place_category) 
     place_simi_cate_sorted_ind = place_simi_cate.argsort()[:, ::-1]
@@ -163,7 +99,7 @@ def category2():
     doc = pd.concat([food_indf, cdata])
     doc.reset_index(drop=True, inplace=True)
 
-    count_vect_category = CountVectorizer(min_df=0, ngram_range=(1,2))
+    count_vect_category = TfidfVectorizer(min_df=0, ngram_range=(1,2))
     place_category = count_vect_category.fit_transform(doc['ingredient']) 
     place_simi_cate = cosine_similarity(place_category, place_category) 
     place_simi_cate_sorted_ind = place_simi_cate.argsort()[:, ::-1]
@@ -202,7 +138,7 @@ def category3():
     doc = pd.concat([food_indf, cdata])
     doc.reset_index(drop=True, inplace=True)
 
-    count_vect_category = CountVectorizer(min_df=0, ngram_range=(1,2))
+    count_vect_category = TfidfVectorizer(min_df=0, ngram_range=(1,2))
     place_category = count_vect_category.fit_transform(doc['ingredient']) 
     place_simi_cate = cosine_similarity(place_category, place_category) 
     place_simi_cate_sorted_ind = place_simi_cate.argsort()[:, ::-1]
@@ -240,7 +176,7 @@ def category4():
     doc = pd.concat([food_indf, cdata])
     doc.reset_index(drop=True, inplace=True)
 
-    count_vect_category = CountVectorizer(min_df=0, ngram_range=(1,2))
+    count_vect_category = TfidfVectorizer(min_df=0, ngram_range=(1,2))
     place_category = count_vect_category.fit_transform(doc['ingredient']) 
     place_simi_cate = cosine_similarity(place_category, place_category) 
     place_simi_cate_sorted_ind = place_simi_cate.argsort()[:, ::-1]
